@@ -5,7 +5,8 @@ def my_min(array)
         next
     end
 end 
-#O(n^2)
+# O(n^2) because we have a nested loop
+#O(1) for space
 
 def largest_contiguous_subsum(array)
     sub_arrs = []
@@ -18,6 +19,8 @@ def largest_contiguous_subsum(array)
     sub_arrs.each {|sub| max_sum = sub.sum if sub.sum >= max_sum }
     return max_sum
 end
+# O(n^3) because of the nested loops and the last loop for time
+# O(n^3) for space
 
 #Phase2
 def my_min2(array)
@@ -25,7 +28,21 @@ def my_min2(array)
     array.each {|item| min = item if item <= min}
     return min
 end
-#O(n)
+# O(n) for time, O(1) for space
+
+def largest_contiguous_subsum2(array)
+    largest_sum = array.first
+    current_sum = array.first
+
+    (1..array.length-1).each do |i|
+        current_sum = 0 if current_sum < 0
+        current_sum += array[i]
+        largest_sum = current_sum if current_sum > largest_sum
+    end
+    largest_sum
+    
+end
+# O(n) for time, 0(1) for space
 
 
 
@@ -37,3 +54,6 @@ list3 = [-5, -1, -3]
 p largest_contiguous_subsum(list)
 p largest_contiguous_subsum(list2)
 p largest_contiguous_subsum(list3)
+p largest_contiguous_subsum2(list)
+p largest_contiguous_subsum2(list2)
+p largest_contiguous_subsum2(list3)
